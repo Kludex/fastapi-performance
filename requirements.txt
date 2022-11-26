@@ -1,0 +1,6 @@
+locust
+fastapi
+uvicorn
+uvloop
+httptools
+orjson

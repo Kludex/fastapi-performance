@@ -1,0 +1,117 @@
+version: "3"
+
+tasks:
+  run-server:
+    cmds:
+      - venv/bin/uvicorn {{.MODULE}}:app --http {{.UVICORN_HTTP | default "h11"}} --loop {{.UVICORN_LOOP | default "asyncio"}} {{.UVICORN_ACCESS_LOG | default "--access-log"}}
+
+  load-test:
+    cmds:
+      - mkdir -p reports/{{.CASE}}
+      - venv/bin/locust --headless --users 20 --spawn-rate 2 -H http://127.0.0.1:8000 -t 30s --csv reports/{{.CASE}}/report.csv --html reports/{{.CASE}}/report.html
+      - kill $(lsof -t -i:8000)
+
+  run:
+    deps:
+      - task: run-server
+        vars:
+          CASE: '{{.CASE | default "simple"}}'
+          MODULE: '{{.MODULE | default "src.cases.simple"}}'
+        env: UVICORN_LOG_LEVEL=debug
+
+      - task: load-test
+        vars:
+          CASE: '{{.CASE | default "simple"}}'
+
+  install-deps:
+    cmds:
+      - python -m venv venv
+      - venv/bin/pip install -r requirements.txt
+
+  benchmark:
+    deps:
+      - task: install-deps
+    cmds:
+      - task: run
+        vars:
+          CASE: '{{.CASE | default "simple"}}'
+
+  all:
+    deps:
+      - task: install-deps
+    cmds:
+      - task: run
+        vars:
+          CASE: simple
+        env:
+          UVICORN_LOOP: asyncio
+          UVICORN_HTTP: h11
+
+      - task: run
+        vars:
+          CASE: use_uvloop
+        env:
+          UVICORN_LOOP: uvloop
+          UVICORN_HTTP: h11
+
+      - task: run
+        vars:
+          CASE: use_httptools
+        env:
+          UVICORN_LOOP: asyncio
+          UVICORN_HTTP: httptools
+
+      - task: run
+        vars:
+          CASE: uvloop_and_httptools
+        env:
+          UVICORN_LOOP: uvloop
+          UVICORN_HTTP: httptools
+
+      - task: run
+        vars:
+          CASE: bigger_threadpool
+          MODULE: src.cases.bigger_threadpool
+        env:
+          UVICORN_LOOP: asyncio
+          UVICORN_HTTP: h11
+
+      - task: run
+        vars:
+          CASE: simple_async
+          MODULE: src.cases.simple_async
+        env:
+          UVICORN_LOOP: asyncio
+          UVICORN_HTTP: h11
+
+      - task: run
+        vars:
+          CASE: convert_once
+          MODULE: src.cases.convert_once
+        env:
+          UVICORN_LOOP: asyncio
+          UVICORN_HTTP: h11
+
+      - task: run
+        vars:
+          CASE: use_orjson
+          MODULE: src.cases.use_orjson
+        env:
+          UVICORN_LOOP: asyncio
+          UVICORN_HTTP: h11
+
+      - task: run
+        vars:
+          CASE: without_validation
+          MODULE: src.cases.without_validation
+        env:
+          UVICORN_LOOP: asyncio
+          UVICORN_HTTP: h11
+
+      - task: run
+        vars:
+          CASE: without_logging
+        env:
+          UVICORN_ACCESS_LOG: "--no-access-log"
+          UVICORN_LOOP: asyncio
+          UVICORN_HTTP: h11

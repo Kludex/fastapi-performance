@@ -8,5 +8,5 @@ app = FastAPI(default_response_class=ORJSONResponse)
 
 
 @app.get("/", response_model=list[Output])
-async def home():
-    return OUTPUT
+def home():
+    return [Output(**item) for item in OUTPUT]

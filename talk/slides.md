@@ -14,45 +14,57 @@ style: |
   }
 ---
 
-## Performance Tips with the FastAPI Expert
+## Performance Tips by the FastAPI Expert
 
-![bg:40% 80%](assets/marcelo.png)
+![w:300](assets/marcelo.png)
 Marcelo Trylesinski
 
 ---
 
-# About me
-
-![w:600](https://live.staticflickr.com/4458/37545736336_93f1591985_b.jpg)
+# Who am I?
 
 ---
 
-## FastAPI Expert
-
-![w:950 center](assets/fastapi-expert.png)
-
+![w:750 center](assets/fastapi-logo.png)
 
 ---
 
-## OSS Maintainer
+# OSS Maintainer
 
 <div class="columns">
 <div>
 
-### Uvicorn
+## Uvicorn
 
 ![w:450](https://raw.githubusercontent.com/tomchristie/uvicorn/master/docs/uvicorn.png)
 
 </div>
 <div>
 
-### Starlette
+## Starlette
 
-![w:600](https://www.starlette.io/img/starlette.png)
+![w:600](assets/starlette-logo.png)
 
 </div>
 </div>
 
+---
+
+# Software Engineer @
+
+![w:750](assets/pydantic-logo.svg)
+
+---
+
+# Try Pydantic V2!
+
+![w:1000](assets/pydantic-v2.png)
+
+---
+
+# Data people, help us!
+
+[pydantic.dev/roadmap](https://pydantic.dev/roadmap/)
 
 ---
 
@@ -71,17 +83,15 @@ Marcelo Trylesinski
 
 ## Simple Application
 
-https://json-generator.com/
-
-https://jsontopydantic.com/
+![w:600](assets/install-fastapi.svg)
 
 ---
 
 ## Simple Application
 
-# requests | req/s
---- | ---
-9990 | 334.37
+https://json-generator.com/
+
+https://jsontopydantic.com/
 
 ---
 
@@ -93,28 +103,7 @@ https://jsontopydantic.com/
 
 ## Use uvloop
 
-<div class="columns">
-<div>
-
-### Simple App
-
-# requests | req/s
---- | ---
-9990 | 334.37
-
-</div>
-<div>
-
-### Simple App + uvloop
-
-# requests | req/s
---- | ---
-11256 | 376.71
-
-</div>
-</div>
-
-### **~12%**
+Improvement of **~10%**
 
 ---
 
@@ -132,29 +121,7 @@ Python binding for the nodejs HTTP parser
 
 ### Use httptools
 
-
-<div class="columns">
-<div>
-
-### Simple App
-
-# requests | req/s
---- | ---
-9990 | 334.37
-
-</div>
-<div>
-
-### Simple App + httptools
-
-# requests | req/s
---- | ---
-11040 | 369.32
-
-</div>
-</div>
-
-### **~10%**
+Improvement of **~10%**
 
 ---
 
@@ -173,28 +140,7 @@ Python binding for the nodejs HTTP parser
 ### Bigger Threadpool
 
 
-<div class="columns">
-<div>
-
-### Simple App
-
-# requests | req/s
---- | ---
-9990 | 334.37
-
-</div>
-<div>
-
-### Increasing Threadpool
-
-# requests | req/s
---- | ---
-11014 | 368.44
-
-</div>
-</div>
-
-### **~10%**
+Improvement of **~5%**
 
 ---
 
@@ -207,28 +153,7 @@ Python binding for the nodejs HTTP parser
 ### Simple Async Application
 
 
-<div class="columns">
-<div>
-
-### Simple App
-
-# requests | req/s
---- | ---
-9990 | 334.37
-
-</div>
-<div>
-
-### Simple Async App
-
-# requests | req/s
---- | ---
-11470 | 383.72
-
-</div>
-</div>
-
-### **~15%**
+Improvement of **~15%**
 
 ---
 
@@ -240,63 +165,20 @@ Python binding for the nodejs HTTP parser
 
 ### Duplicated validation
 
-
-<div class="columns">
-<div>
-
-### Simple App
-
-# requests | req/s
---- | ---
-9990 | 334.37
-
-</div>
-<div>
-
-### Single Validation
-
-# requests | req/s
---- | ---
-13449 | 449.90
-
-</div>
-</div>
-
-### **~35%**
+Improvement of **~25%**
 
 ---
 
 ### Use ORJSON
 
-![w:800](assets/orjson.svg)
+![w:800](assets/orjson-code.svg)
 
 ---
 
 ### Use ORJSON
 
 
-<div class="columns">
-<div>
-
-### Simple App
-
-# requests | req/s
---- | ---
-9990 | 334.37
-
-</div>
-<div>
-
-### Using ORJSON
-
-# requests | req/s
---- | ---
-14441 | 483.09
-
-</div>
-</div>
-
-### **~45%**
+Improvement of **~5%**
 
 ---
 
@@ -309,28 +191,7 @@ Python binding for the nodejs HTTP parser
 ### Without Validation
 
 
-<div class="columns">
-<div>
-
-### Simple App
-
-# requests | req/s
---- | ---
-9990 | 334.37
-
-</div>
-<div>
-
-### Without Validation
-
-# requests | req/s
---- | ---
-28664 | 958.86
-
-</div>
-</div>
-
-### **~187%**
+Improvement of **~150%**
 
 ---
 
@@ -343,28 +204,17 @@ Python binding for the nodejs HTTP parser
 ### Without Logging
 
 
-<div class="columns">
-<div>
+Improvement of **~15%**
 
-### Simple App
+---
 
-# requests | req/s
---- | ---
-9990 | 334.37
+### Without any of the previous improvements...
 
-</div>
-<div>
+Using Pydantic V2...
 
-### Without Logging
+---
 
-# requests | req/s
---- | ---
-10884 | 364.12
-
-</div>
-</div>
-
-### **~9%**
+Improvement of **~265%**
 
 ---
 
